@@ -1,0 +1,5 @@
+.idea/
+stack*.yaml.lock
+.stack-work
+.git
+*.iml
