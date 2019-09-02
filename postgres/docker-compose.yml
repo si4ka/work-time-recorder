@@ -1,0 +1,15 @@
+version: '3'
+services:
+  db:
+    image: postgres:10.1
+    container_name: postgres-wtr
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      POSTGRES_DB: wtr
+      POSTGRES_USER: wtr-user
+      POSTGRES_PASSWORD: abcdefg
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - ./lib/postgresql/data:/var/lib/postgresql/data
