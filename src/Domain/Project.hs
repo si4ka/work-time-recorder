@@ -2,4 +2,7 @@
 
 module Domain.Project where
 
-newtype Project = Project String deriving (Show)
+import Database.HDBC.Query.TH
+
+newtype Project = Project String deriving (Show, Read, Eq, Ord)
+

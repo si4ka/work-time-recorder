@@ -35,7 +35,7 @@ api = Proxy
 
 server :: Server API
 server = return users
-       :<|> return ProjectListView.allProject
+       :<|> ProjectListView.allProjectHandler
 
 users :: [User]
 users = [ User 1 "Isaac" "Newton"
