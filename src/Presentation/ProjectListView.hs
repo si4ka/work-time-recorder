@@ -14,10 +14,11 @@ import qualified Infrastructure.Query.ProjectQuery as PQ
 import Control.Monad.IO.Class (liftIO)
 
 $(deriveJSON defaultOptions 'Project)
-type CRUD = "projects" :> Get '[JSON] [Project]
+type AllProjects = "projects" :> Get '[JSON] [Project]
+type API = AllProjects
 
-crud :: Proxy CRUD
-crud = Proxy
+api :: Proxy API
+api = Proxy
 
 allProjects :: IO [Project]
 allProjects = PQ.allProjects

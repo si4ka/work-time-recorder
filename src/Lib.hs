@@ -22,7 +22,7 @@ data User = User
 $(deriveJSON defaultOptions ''User)
 
 type API = "users" :> Get '[JSON] [User]
-         :<|> ProjectListView.CRUD
+         :<|> ProjectListView.API
 
 startApp :: IO ()
 startApp = run 8080 app
