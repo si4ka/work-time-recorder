@@ -12,12 +12,16 @@ import Servant
 import Domain.Project
 import qualified Infrastructure.Query.ProjectQuery as PQ
 import Control.Monad.IO.Class (liftIO)
+import Data.Swagger
 
 $(deriveJSON defaultOptions 'Project)
-type CRUD = "projects" :> Get '[JSON] [Project]
+instance ToSchema Project
 
-crud :: Proxy CRUD
-crud = Proxy
+type AllProjects = "projects" :> Get '[JSON] [Project]
+type API = AllProjects
+
+api :: Proxy API
+api = Proxy
 
 allProjects :: IO [Project]
 allProjects = PQ.allProjects

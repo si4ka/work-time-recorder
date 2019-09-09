@@ -11,7 +11,9 @@ import Data.Aeson.TH
 import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
+import Servant.Swagger
 import qualified Presentation.ProjectListView as ProjectListView
+import qualified Data.ByteString.Lazy.Char8 as BSL8
 
 data User = User
   { userId        :: Int
@@ -22,10 +24,15 @@ data User = User
 $(deriveJSON defaultOptions ''User)
 
 type API = "users" :> Get '[JSON] [User]
-         :<|> ProjectListView.CRUD
+         :<|> ProjectListView.API
 
 startApp :: IO ()
-startApp = run 8080 app
+startApp = do
+  BSL8.putStrLn $ encode $ toSwagger (Proxy :: Proxy ProjectListView.API)
+  run 8080 app
+
+swaggerDoc :: Swagger
+swaggerDoc = toSwagger (Proxy :: Proxy ProjectListView.API)
 
 app :: Application
 app = serve api server

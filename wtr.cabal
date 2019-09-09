@@ -31,6 +31,9 @@ library
                      , HDBC-postgresql
                      , relational-query-HDBC
                      , relational-query
+                     , servant-swagger
+                     , swagger2
+                     , bytestring
   default-language:    Haskell2010
 
 executable wtr-exe
