@@ -15,12 +15,15 @@ import Control.Monad.IO.Class (liftIO)
 
 $(deriveJSON defaultOptions 'Project)
 type CRUD = "projects" :> Get '[JSON] [Project]
+       :<|> "projects" :> ReqBody '[JSON, FormUrlEncoded] Project :> Post '[JSON] Project
 
 crud :: Proxy CRUD
 crud = Proxy
 
-allProjects :: IO [Project]
-allProjects = PQ.allProjects
-
 allProjectHandler :: Handler [Project]
 allProjectHandler = liftIO $ PQ.allProjects
+
+postProjects :: Project -> Handler Project
+postProjects project = do
+  liftIO $ PQ.insertProject project
+  return project

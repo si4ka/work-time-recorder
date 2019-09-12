@@ -3,6 +3,8 @@
 module Domain.Project where
 
 import Database.HDBC.Query.TH
+import Web.FormUrlEncoded (FromForm(..), parseUnique)
+import GHC.Generics
 
-newtype Project = Project String deriving (Show, Read, Eq, Ord)
-
+data Project = Project {name :: String} deriving (Show, Read, Eq, Ord, Generic)
+instance FromForm Project
